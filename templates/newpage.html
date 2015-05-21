@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+	{% if errors %}
+		<div class="errors {{error_class}}">{{ errors }}</div>
+	{% else %}
+		<h1>This page doesn't exist! Create it now</h1>
+	{% endif %}
+	<form id="add_page" class="add-post" method="post">
+		<textarea name="content" class="edit-post post-entry">{{page_entry}}</textarea>
+		<input type="submit" value="Save"/>
+	</form>
+	<!--form class="cancel-edit" action="/wikipages">
+		<input type="submit" value="Cancel">
+	</form-->
+{% endblock %}

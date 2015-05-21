@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+		<h1>{{ link }}: Page history</h1>
+
+		<p>Created: {{ created.strftime('%d %b %Y at %H:%M:%S %Z') }}</p>
+
+		<p>Revisions: 
+		{% if count == 0 %}
+			No revisions yet.
+		{% elif count == 1 %}
+			Edited once.
+		{% elif count == 2 %}
+			Edited twice.
+		{% else %}
+			Edited {{ count }} times.
+		{% endif %}
+		
+		</p>
+		<table id="page-history">
+			<tr class="table-header">
+				<td class="title">Version</td>
+				<td>Edited</td>
+			</tr>
+		{% for version in versions %}
+			<tr>
+				{% if version.version_number == 0 %}
+					<td class="title"><a href="{{version.link}}?version={{ version.key().id() }}">Original version</a></td>
+					<td>{{ created.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>
+				{% else %}
+					<td class="title"><a href="{{version.link}}?version={{ version.key().id() }}">Version {{version.version_number}}</a></td>
+					<td>{{ version.last_edited.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+		</table>	
+		
+{% endblock %}

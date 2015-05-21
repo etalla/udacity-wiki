@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+		
+	{% if latest_version == 0 %}
+		<div class="errors show">
+			Warning! There is a more recent version of this page. 
+			Editing this version will erase the more recent changes.
+			To see the latest version, <a href="/_history{{page.link}}">go here</a>
+		</div>
+	{% endif %}
+
+	<p class="edit-page">
+		<a href="{{page.link}}">Cancel editing</a> | 
+		<a href="/_history{{page.link}}">History ({{ count}} revision{% if count != 1 %}s) {% endif %}</a>
+	</p>
+	<form id="edit_page" class="add-post" method="post">
+		<div class="errors {{error_class}}">{{ errors }}</div>
+		<textarea name="content" class="edit-post post-entry">{{page.content}}</textarea>
+		<input type="submit" value="Save"/>
+	</form>
+	<!--form class="cancel-edit" action="{{page.link}}">
+		<input type="submit" value="Cancel">
+	</form-->
+{% endblock %}

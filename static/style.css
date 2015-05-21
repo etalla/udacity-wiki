@@ -1,0 +1,144 @@
+body{
+	margin:0 10em;
+	font-family: sans-serif;
+}
+#header{
+	padding: 5px;
+	margin:0 0 2em 0;
+	border-bottom: 3px #333 solid;
+	float: left;
+	width: 100%;
+}
+#header h1{
+	margin: 0;
+}
+a,
+a:hover,
+a:focus,
+a:visited{
+	text-decoration: none;
+}
+#header a{
+	color: #333;
+}
+/*Menus*/
+.nav{
+	list-style-type:none;
+	padding: 0;
+}
+.nav li{
+	display: inline;
+}
+.nav span{
+	padding: 0 1em;
+}
+#menu.nav{
+	float: left;
+}
+#user-menu.nav{
+	float:right;
+}
+footer{
+	border-top: 1px #C2C2C2 solid;
+	padding: 5px;
+	margin-top: 5em;
+	width: 100%;
+	float: left;
+}
+footer .nav a,
+footer .nav span{
+	color: #C2C2C2;
+	font-size: 90%;
+}
+/*Welcome page*/
+ul.welcome{
+	margin-top: 2em;
+}
+ul.welcome li{	
+	line-height: 2em;
+}
+/*Pages */
+p.edit-page{
+	float: right;
+}
+.edit-page span{
+	background: url(edit-icon.png) no-repeat;
+	width: 22px;
+	vertical-align: 16%;
+	padding: 0 1.2em;
+}
+#page-history,
+#wikipages{
+	margin-top: 2em;
+}
+#page-history .table-header,
+#wikipages .table-header{
+	font-size: 1.1em;
+	line-height: 2em;
+	font-weight: bold;
+}
+#wikipages td{
+	width: 15em;
+}
+#page-history td.title,
+#wikipages td.title{
+	width: 20em;
+}
+/* Posts */
+.date{
+	color: gray;
+	font-size: 0.9em;
+}
+.post-entry{
+	margin-top: 1em;
+}
+.errors{
+	background: rgb(255, 241, 243);
+	color: darkred;
+	display: inline-block;
+	padding: 1em 0.5em;
+	margin-bottom: 1em;
+	display:none;
+}
+.errors.show{
+	display: inline-block;
+}
+/* Add or edit a post */
+.edit-post.post-title{
+	font-size: 2em;
+}
+.edit-post.post-title, 
+.edit-post.post-entry{
+	width: 75%;
+	display: block;
+	border: 1px solid rgb(210, 212, 214);
+	border-radius: 3px;
+}
+.edit-post.post-entry{
+	height: 20em;
+}
+.add-post input[type="submit"],
+.cancel-edit input[type="submit"]{
+	padding: 0.7em 1em;
+	margin-top: 1em;
+	float: left;
+}
+.cancel-edit input[type="submit"]{
+	margin-left: 2em;
+}
+/* View a single post */
+.single-post.post-title{
+}
+.single-post.post-entry{
+}
+/* View all latest posts */
+.list-post.post-title{
+}
+.list-post.post-entry{
+}
+.label {
+	text-align: right
+}
+.error {
+	color: red
+}

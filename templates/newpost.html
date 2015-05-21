@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+	<form class="add-post" method="post">
+		<h1 class="page-title">{{page_title}}</h1>
+		<div class="errors {{error_class}}">{{ errors }}</div>
+		<input type="text" placeholder="Title" name="subject" value="{{post_title}}" class="edit-post post-title">
+		<textarea name="content" class="edit-post post-entry">{{post_entry}}</textarea>
+		<input type="submit" value="Save"/>
+	</form>
+{% endblock %}

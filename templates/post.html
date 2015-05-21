@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1 class="single-post post-title">{{post.title}}</h1>
+	<small>Queried {{ seconds }} seconds ago</small>	
+	<div class="date">Published on {{ post.created.strftime('%Y-%m-%d') }} at {{ post.created.strftime('%H:%M:%S %Z')}}</div>
+	<div class="single-post post-entry">{{post.content}}</div>
+{% endblock %}

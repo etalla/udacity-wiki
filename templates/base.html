@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Eva's Udacity project</title>
+		<link rel="stylesheet" type="text/css" href="/static/style.css">
+	</head>
+	
+	<body>
+		<div id="header">
+			<h1><a href="/">Udacity project</a></h1>
+			<ul class="nav" id="menu">
+				<li><a href="/welcome">Welcome</a></li><span>|</span>
+				<li><a href="/blog">Latest posts</a></li><span>|</span>
+				<li><a href="/newpost">Add a post</a></li><span>|</span>
+				<li><a href="/wikipages">Wiki pages</a></li>
+			</ul>
+			<ul class="nav" id="user-menu">
+				{% if username %}
+					<li>Welcome, {{ username }}</li><span>|</span>
+					<li><a href="/logout">Log out</a></li>
+				{% else %}
+					<li><a href="/signup">Sign up</a></li><span>|</span>
+					<li><a href="/login">Log in</a></li>
+				{% endif %}
+			</ul>
+		</div><!--header-->
+		{% block content %}
+		{% endblock %}
+	<footer>
+		<ul class="nav" id="footer">
+			<li><a href="/blog.json">Json output</a></li><span>|</span>
+			<li><a href="/flush">Reset cache</a></li>
+		</ul>
+	</footer>
+	</body>
+</html>
