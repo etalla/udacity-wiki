@@ -35,13 +35,12 @@ def valid_email(email):
     return not email or EMAIL_RE.match(email)
     
 def is_logged_in(cookie_val):
-    if len(cookie_val) > 1:
+    if cookie_val is not None and len(str(cookie_val)) > 1:
         hash = str(cookie_val.split('|')[0]) + "|" +  str(cookie_val.split('|')[1])
         username = str(cookie_val.split('|')[2])
         password = str(cookie_val.split('|')[3])
-    
         if valid_pw(username,password,hash):
-            logging.info("username is" + username)
+            #logging.info("username is" + username)
             return str(username)
         else: 
             return False

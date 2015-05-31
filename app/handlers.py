@@ -30,17 +30,17 @@ class Main(BaseHandler):
 class BlogHome(BaseHandler):
     def get(self):
         diff = query_age('top')
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         self.render('blog.html', page_title = "Your 10 latest posts", posts = top_posts(), seconds = diff.seconds, username = username)
 
 class Welcome(BaseHandler):
     def get(self):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         self.render('welcome.html', username = username)
 
 class Signup(BaseHandler):
     def get(self):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         if username:
             self.redirect('/welcome')
         else:
@@ -90,7 +90,7 @@ class Signup(BaseHandler):
 
 class Login(BaseHandler):
     def get(self):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         if username:
             self.redirect('/welcome')
         else:
@@ -126,7 +126,7 @@ class Logout(BaseHandler):
         
 class Add(BaseHandler):
     def get(self):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         if username:
             self.render('newpost.html',page_title="New post",post_title="",post_entry="",errors="",error_class="",username=username)
         else:
@@ -135,7 +135,7 @@ class Add(BaseHandler):
     def post(self):
         post_title = self.request.get('subject')
         post_entry = self.request.get('content')
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         if post_title and post_entry:
             post = Blog(title=post_title,content=post_entry)
             post.put()
@@ -167,7 +167,7 @@ class PostPage(BaseHandler):
             self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
             self.response.write(json_data)
         else:
-            username = is_logged_in(str(self.request.cookies.get('auth')))
+            username = is_logged_in(self.request.cookies.get('auth'))
             post = single_post(post_id)
             if not post:
                 self.error(404)
@@ -179,7 +179,7 @@ class PostPage(BaseHandler):
 class EditPage(BaseHandler):
     def get(self, pagelink):
         page = get_latest_page(pagelink)
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         if page:
             version_id = self.request.get('version')
             latest_version = 1 #true by default if there is no query string 
@@ -217,7 +217,7 @@ class EditPage(BaseHandler):
                     self.redirect('/login')
 
     def post(self, pagelink):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         content = self.request.get('content')
         response = save_page(content,pagelink)
         if response[0] is True:
@@ -229,7 +229,7 @@ class EditPage(BaseHandler):
 
 class PageHistory(BaseHandler):
     def get(self, pagelink):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         q = Page.all().filter('link = ', pagelink).order('-last_edited')
         page = q.get()
         versions = list(q.fetch(limit=30))
@@ -247,7 +247,7 @@ class WikiPage(BaseHandler):
         if page is None:
             self.redirect("/_edit"+pagelink)
         else:
-            username = is_logged_in(str(self.request.cookies.get('auth')))
+            username = is_logged_in(self.request.cookies.get('auth'))
             version_id = self.request.get('version')
             latest_version = 1 #true by default if there is no query string
             version_key = page.key()
@@ -259,7 +259,7 @@ class WikiPage(BaseHandler):
             self.render("page.html", page=page, username=username, version_id = str(version_id), latest_version = latest_version, count = count_revisions(pagelink))
 
     def post(self, pagelink):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         content = self.request.get('content')
         response = save_page(content,pagelink)
         if response[0] is True:
@@ -271,7 +271,7 @@ class WikiPage(BaseHandler):
 
 class Wikipages(BaseHandler):
     def get(self):
-        username = is_logged_in(str(self.request.cookies.get('auth')))
+        username = is_logged_in(self.request.cookies.get('auth'))
         q = Page.all().filter('version_number = ', 0).order('-created')
         parents = list(q.fetch(limit=30))
         latest_pages = []
