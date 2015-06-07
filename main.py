@@ -22,8 +22,9 @@ app = webapp2.WSGIApplication([
                             ('/flush', Flush),
                             ('/wikipages', Wikipages),
                             ('/_edit' + PAGE_RE, EditPage),
-                            ('/_history', IndexHistory),
                             ('/_history' + PAGE_RE, PageHistory),
+                            ('/_edit', EditPage),
+                            ('/_history' , PageHistory),
                             (PAGE_RE, WikiPage),
                             ],
                             debug=True)

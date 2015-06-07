@@ -223,13 +223,8 @@ class EditPage(BaseHandler):
             page_entry=content,
             errors = response[1],error_class="show", username=username)
 
-class IndexHistory(BaseHandler):
-    def get(self):
-        username = is_logged_in(self.request.cookies.get('auth'))
-        self.render('index.html', username = username)
-    
 class PageHistory(BaseHandler):
-    def get(self, pagelink):
+    def get(self, pagelink="/"):
         username = is_logged_in(self.request.cookies.get('auth'))
         q = Page.all().filter('link = ', pagelink).order('-last_edited')
         page = q.get()
