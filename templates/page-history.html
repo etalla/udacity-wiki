@@ -31,7 +31,7 @@
 					<td class="title"><a href="{{version.link}}?version={{ version.key().id() }}">Version {{version.version_number}}</a></td>
 					<td>{{ version.last_edited.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>
 				{% endif %}
-				<td>{{ version.content[0:140] }}...</td>
+				<td>{{ version.content[0:140]|e}}...</td>
 				<td><a href="{{version.link}}?version={{ version.key().id() }}">view</a></td>
 				<td><a href="/_edit{{version.link}}?version={{ version.key().id() }}">edit</a></td>
 			</tr>
