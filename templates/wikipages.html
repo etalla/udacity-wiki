@@ -11,7 +11,7 @@
 				<td>Revisions</td>
 			</tr>
 		{% for latest_page in latest_pages %}
-			<tr>
+			<tr{% if loop.index % 2 == 0 %} class="odd"{% endif %}>
 				<td class="title"><a href="{{latest_page.link}}?version={{ latest_page.key().id() }}">{{ latest_page.link }}</a></td>
 					<td>{{ latest_page.created.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>
 					<td>{{ latest_page.last_edited.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>

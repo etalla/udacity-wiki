@@ -70,6 +70,7 @@ p.edit-page{
 #page-history,
 #wikipages{
 	margin-top: 2em;
+	border-collapse: collapse;
 }
 #page-history .table-header,
 #wikipages .table-header{
@@ -81,8 +82,21 @@ p.edit-page{
 	width: 15em;
 }
 #page-history td.title,
-#wikipages td.title{
-	width: 20em;
+#wikipages td.title,
+#page-history td.edited{
+	width: 15em;
+}
+#page-history tr,
+#wikipages tr{
+	height: 2.5em;
+}
+#page-history tr.odd,
+#wikipages tr.odd{
+	background: whitesmoke;
+}
+#page-history td,
+#wikipages td{
+	padding: 0.5em;
 }
 /* Posts */
 .date{

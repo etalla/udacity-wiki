@@ -20,10 +20,10 @@
 		<table id="page-history">
 			<tr class="table-header">
 				<td class="title">Version</td>
-				<td>Edited</td>
+				<td class="edited">Edited</td>
 			</tr>
 		{% for version in versions %}
-			<tr>
+			<tr{% if loop.index % 2 == 0 %} class="odd"{% endif %}>
 				{% if version.version_number == 0 %}
 					<td class="title"><a href="{{version.link}}?version={{ version.key().id() }}">Original version</a></td>
 					<td>{{ created.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>
@@ -31,6 +31,9 @@
 					<td class="title"><a href="{{version.link}}?version={{ version.key().id() }}">Version {{version.version_number}}</a></td>
 					<td>{{ version.last_edited.strftime('%d %b %Y at %H:%M:%S %Z') }}</td>
 				{% endif %}
+				<td>{{ version.content[0:140] }}...</td>
+				<td><a href="{{version.link}}?version={{ version.key().id() }}">view</a></td>
+				<td><a href="/_edit{{version.link}}?version={{ version.key().id() }}">edit</a></td>
 			</tr>
 		{% endfor %}
 		</table>	
