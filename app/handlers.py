@@ -96,14 +96,14 @@ class Login(BaseHandler):
         username_field = self.request.get('username_field')
         password = self.request.get('password')
         if username_field == "":
-            self.render('login.html', error = "Please enter a username")
+            self.render('login.html', error_username = "Please enter a username")
         elif password == "":
-            self.render('login.html', username_field = username_field, error = "Please enter a password")
+            self.render('login.html', username_field = username_field, error_password = "Please enter a password")
         else:
             q = User.all()
             q.filter("username =", username_field)
             if q.get() == None:
-                self.render('login.html', username_field = username_field, error = "No such username exists")
+                self.render('login.html', username_field = username_field, error_username = "No such username exists")
             else: 
                 for p in q.run(limit=1):
                     hash = p.password
@@ -112,7 +112,7 @@ class Login(BaseHandler):
                     self.response.headers.add_header('Set-Cookie', 'auth='+str(cookievalue)+'; Path=/')
                     self.render('welcome.html', username = username_field)
                 else:
-                    self.render('login.html', username_field = username_field, password = password, error = "Invalid login")
+                    self.render('login.html', username_field = username_field, password = password, error_password = "Invalid login")
 
 class Logout(BaseHandler):
     def get(self): 
