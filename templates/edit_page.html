@@ -10,8 +10,8 @@
 	{% endif %}
 
 	<p class="edit-page">
-		<a href="{{page.link}}?version={{ version_id }}">Cancel editing</a> | 
-		<a href="/_history{{page.link}}">History ({{ count}} revision{% if count != 1 %}s) {% endif %}</a>
+		<a href="{{page.link}}{% if latest_version == 0 %}?version={{ version_id }}{% endif %}">Cancel editing</a> | 
+		<a href="/_history{{page.link}}">History ({{ count}} revision{% if count != 1 %}s) {% endif %})</a>
 	</p>
 	<form id="edit_page" class="add-post" method="post">
 		<div class="errors {{error_class}}">{{ errors }}</div>
