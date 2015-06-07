@@ -44,15 +44,15 @@ class Signup(BaseHandler):
 
     def post(self):
         have_error = False
-        username = self.request.get('username')
+        username_field = self.request.get('username_field')
         password = self.request.get('password')
         verify = self.request.get('verify')
         email = self.request.get('email')
 
-        params = dict(username = username,
+        params = dict(username_field = username_field,
                       email = email)
 
-        if not valid_username(username):
+        if not valid_username(username_field):
             params['error_username'] = "That's not a valid username."
             have_error = True
 
@@ -69,7 +69,7 @@ class Signup(BaseHandler):
             have_error = True
 
         if valid_username:
-            q = User.all().filter('username = ', username)
+            q = User.all().filter('username = ', username_field)
             if q.get():
                 params['error_username'] = "This username is already taken."
                 have_error = True
@@ -77,10 +77,10 @@ class Signup(BaseHandler):
         if have_error:
             self.render('signup-form.html', **params)
         else:
-            password_hash = make_pw_hash(username,password)
-            user = User(username=username,email=email,password=password_hash)
+            password_hash = make_pw_hash(username_field,password)
+            user = User(username=username_field,email=email,password=password_hash)
             user.put()
-            cookievalue = password_hash + '|' + username + '|' + password
+            cookievalue = password_hash + '|' + username_field + '|' + password
             self.response.headers.add_header('Set-Cookie', 'auth='+str(cookievalue)+'; Path=/')
             self.redirect('/welcome')
 
@@ -93,26 +93,26 @@ class Login(BaseHandler):
             self.render('login.html')
 
     def post(self):
-        username = self.request.get('username')
+        username_field = self.request.get('username_field')
         password = self.request.get('password')
-        if username == "":
+        if username_field == "":
             self.render('login.html', error = "Please enter a username")
         elif password == "":
-            self.render('login.html', username = username, error = "Please enter a password")
+            self.render('login.html', username_field = username_field, error = "Please enter a password")
         else:
             q = User.all()
-            q.filter("username =", username)
+            q.filter("username =", username_field)
             if q.get() == None:
-                self.render('login.html', username= username, error = "No such username exists")
+                self.render('login.html', username_field = username_field, error = "No such username exists")
             else: 
                 for p in q.run(limit=1):
                     hash = p.password
-                if valid_pw(username,password,hash):
-                    cookievalue = make_pw_hash(username,password) + '|' + username + '|' + password
+                if valid_pw(username_field,password,hash):
+                    cookievalue = make_pw_hash(username_field,password) + '|' + username_field + '|' + password
                     self.response.headers.add_header('Set-Cookie', 'auth='+str(cookievalue)+'; Path=/')
-                    self.render('welcome.html', username = username)
+                    self.render('welcome.html', username = username_field)
                 else:
-                    self.render('login.html', username= username, password=password, error = "Invalid login")
+                    self.render('login.html', username_field = username_field, password = password, error = "Invalid login")
 
 class Logout(BaseHandler):
     def get(self): 
