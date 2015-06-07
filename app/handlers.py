@@ -23,10 +23,6 @@ class BaseHandler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
-class Main(BaseHandler):
-    def get(self):
-        self.redirect("/blog")
-
 class BlogHome(BaseHandler):
     def get(self):
         diff = query_age('top')
@@ -177,7 +173,7 @@ class PostPage(BaseHandler):
 
 ## Wiki pages handlers
 class EditPage(BaseHandler):
-    def get(self, pagelink):
+    def get(self, pagelink="/"):
         page = get_latest_page(pagelink)
         username = is_logged_in(self.request.cookies.get('auth'))
         if page:
@@ -227,6 +223,11 @@ class EditPage(BaseHandler):
             page_entry=content,
             errors = response[1],error_class="show", username=username)
 
+class IndexHistory(BaseHandler):
+    def get(self):
+        username = is_logged_in(self.request.cookies.get('auth'))
+        self.render('index.html', username = username)
+    
 class PageHistory(BaseHandler):
     def get(self, pagelink):
         username = is_logged_in(self.request.cookies.get('auth'))
@@ -242,7 +243,7 @@ class PageHistory(BaseHandler):
             self.render("page-history.html", link = link, count = count, versions=versions, username=username,created=created)
 
 class WikiPage(BaseHandler):
-    def get(self, pagelink):
+    def get(self, pagelink="/"):
         page = get_latest_page(pagelink)
         if page is None:
             self.redirect("/_edit"+pagelink)

@@ -10,7 +10,7 @@ PAGE_RE = r'(/(?:[a-zA-Z0-9_-]+/?)*)'
 
 app = webapp2.WSGIApplication([
                             ('/blog', BlogHome),
-                            ('/', Main),
+                            ('/', WikiPage),
                             ('/newpost',Add),
                             ('/blog/([0-9]+)', PostPage),
                             ('/signup', Signup),
@@ -22,6 +22,7 @@ app = webapp2.WSGIApplication([
                             ('/flush', Flush),
                             ('/wikipages', Wikipages),
                             ('/_edit' + PAGE_RE, EditPage),
+                            ('/_history', IndexHistory),
                             ('/_history' + PAGE_RE, PageHistory),
                             (PAGE_RE, WikiPage),
                             ],
