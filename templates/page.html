@@ -4,7 +4,7 @@
 	{% if latest_version == 0 %}
 		<div class="errors show">
 			This is not the most recent version of this page. 
-			To see the latest version, <a href="/_history{{page.link}}">go here</a>
+			To see the latest version, <a class="strong" href="{{page.link}}">go here</a>
 		</div>
 	{% endif %}
 
@@ -27,7 +27,7 @@
 		</a>
 	</p>
 	{% if page %}
-		<small>Published {{ page.created.strftime('%d %b %Y at %H:%M:%S %Z') }}</small>
+		<small class="pub-date">Published {{ page.created.strftime('%d %b %Y at %H:%M:%S %Z') }}</small>
 		<div class="single-post post-entry">{{page.content}}</div>
 	{% endif %}
 {% endblock %}
